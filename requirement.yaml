@@ -1,0 +1,15 @@
+name: advanced-python
+channels:
+  - nvidia
+  - pytorch
+  - conda-forge
+dependencies:
+  - python>3.9
+  - pytorch==1.13.0
+  - torchvision==0.14.0
+  - pytorch-lightning==1.8.6
+  - numpy<2
+  - scikit-learn
+  - pandas
+  - matplotlib
+  - scipy
