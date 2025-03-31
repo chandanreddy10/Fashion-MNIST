@@ -116,6 +116,7 @@ class CNN_v3(nn.Module):
                       padding=1),
             nn.BatchNorm2d(hidden_units),
             nn.ReLU(),
+            nn.Dropout(p=0.3),
             nn.Conv2d(in_channels=hidden_units, 
                       out_channels=hidden_units,
                       kernel_size=3,
@@ -123,6 +124,7 @@ class CNN_v3(nn.Module):
                       padding=1),
             nn.BatchNorm2d(hidden_units),
             nn.ReLU(),
+            nn.Dropout(p=0.3),
             nn.MaxPool2d(kernel_size=2,
                          stride=2) 
         )
@@ -135,6 +137,7 @@ class CNN_v3(nn.Module):
             
             nn.BatchNorm2d(hidden_units),
             nn.ReLU(),
+            nn.Dropout(p=0.3),
             nn.Conv2d(in_channels=hidden_units, 
                       out_channels=hidden_units, 
                       kernel_size=3,
@@ -142,6 +145,7 @@ class CNN_v3(nn.Module):
                       padding=1),
             nn.BatchNorm2d(hidden_units),
             nn.ReLU(),
+            nn.Dropout(p=0.3),
             nn.MaxPool2d(2)
         )
         self.residual_1 = nn.Sequential(
@@ -160,10 +164,6 @@ class CNN_v3(nn.Module):
         )
     def forward(self,x):
         x1 = self.block_1(x)
-
-        x1_residual = self.residual_1(x) 
-        x1 += x1_residual
-        
         x2 = self.block_2(x1)
 
         x2_residual = self.residual_1(x1)
